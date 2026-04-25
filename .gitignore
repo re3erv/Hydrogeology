@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+.venv/
+venv/
+
+# Packaging/build
+build/
+dist/
+*.egg-info/
+
+# Testing / cache
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# MODFLOW outputs and temp model artifacts
+*.hds
+*.hed
+*.cbc
+*.bud
+*.ucn
+*.ddn
+*.lst
+*.glo
+*.out
+*.log
+*.err
+*.chk
+*.tmp
+*.bak
+*.swp
+
+# Local executables / downloads
+bin/
+executables/

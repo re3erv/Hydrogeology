@@ -75,6 +75,50 @@ docs/notes/modelmuse_b2_checklist.md
 
 ---
 
+7. Запустить модуль B3 (recharge `RCHA`):
+
+```bash
+python scripts/build_mf6_03_recharge.py
+```
+
+8. Открыть проект B3 в ModelMuse и пройти чеклист:
+
+```text
+docs/notes/modelmuse_b3_checklist.md
+```
+
+Ожидаемые артефакты B3:
+
+- `models/mf6/03_recharge/mfsim.nam`
+- `models/mf6/03_recharge/mf6_03_recharge.hds`
+- `models/mf6/03_recharge/mf6_03_recharge.cbc`
+- `models/mf6/03_recharge/heads_map.png`
+- `models/mf6/03_recharge/recharge_map.png`
+- `models/mf6/03_recharge/run_summary.txt`
+
+---
+
+## Этап B3. Recharge (`RCHA`)
+
+Цель: показать, как равномерное площадное питание влияет на распределение напоров.
+
+Постановка (минимально относительно B1):
+
+- тот же grid: 1 слой, 10 x 10 ячеек;
+- те же CHD слева/справа (`10` и `0`);
+- однородная гидропроводность `K = 10`;
+- равномерный recharge `RCHA = 1e-4` по всей площади;
+- steady-state.
+
+Definition of Done:
+
+- модель запускается через `sim.run_simulation()`;
+- сформированы карты `heads_map.png` и `recharge_map.png`;
+- в `run_summary.txt` отражён процент невязки водного баланса;
+- рассчитана метрика подъёма центральной области относительно боковых CHD-границ.
+
+---
+
 ## Этап B2. Неоднородная гидропроводность `K`
 
 Цель: показать, как неоднородность `K` меняет поле напоров при тех же граничных условиях.

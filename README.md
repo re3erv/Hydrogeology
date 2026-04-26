@@ -121,6 +121,29 @@ docs/notes/modelmuse_b4_checklist.md
 
 ---
 
+11. Запустить модуль B5 (сравнение граничных пакетов `RIV` / `DRN` / `GHB`):
+
+```bash
+python scripts/build_mf6_05_riv_drn_ghb.py
+```
+
+12. Открыть проект B5 в ModelMuse и пройти чеклист:
+
+```text
+docs/notes/modelmuse_b5_checklist.md
+```
+
+Ожидаемые артефакты B5:
+
+- `models/mf6/05_riv_drn_ghb/riv/mfsim.nam`
+- `models/mf6/05_riv_drn_ghb/drn/mfsim.nam`
+- `models/mf6/05_riv_drn_ghb/ghb/mfsim.nam`
+- `models/mf6/05_riv_drn_ghb/comparison_metrics.csv`
+- `models/mf6/05_riv_drn_ghb/comparison_plot.png`
+- `models/mf6/05_riv_drn_ghb/run_summary.txt`
+
+---
+
 ## Этап B3. Recharge (`RCHA`)
 
 Цель: показать, как равномерное площадное питание влияет на распределение напоров.
@@ -160,6 +183,33 @@ Definition of Done:
 - сформированы карты `heads_map.png` и `drawdown_map.png`;
 - в `run_summary.txt` отражён процент невязки водного баланса;
 - рассчитана метрика максимального drawdown (`baseline - pumped`) и положение ячейки максимума.
+
+---
+
+## Этап B5. Сравнение `RIV` / `DRN` / `GHB`
+
+Цель: показать различия поведения типовых head-dependent границ MF6 при одинаковой геометрии и близких параметрах проводимости.
+
+Постановка (минимально относительно B1):
+
+- тот же grid: 1 слой, 10 x 10 ячеек;
+- те же CHD слева/справа (`10` и `0`);
+- однородная гидропроводность `K = 10`;
+- вдоль верхнего ряда (без угловых CHD-узлов) поочерёдно задаются:
+  - `RIV` (stage=7, cond=20, rbot=5),
+  - `DRN` (elev=7, cond=20),
+  - `GHB` (bhead=7, cond=20);
+- steady-state, три отдельных прогона.
+
+Definition of Done:
+
+- все три модели запускаются через `sim.run_simulation()`;
+- сформированы `comparison_metrics.csv` и `comparison_plot.png`;
+- в `run_summary.txt` сведены ключевые метрики по каждому пакету:
+  - напор в центральной ячейке,
+  - напор в верхней центральной ячейке,
+  - суммарный обмен через пакет,
+  - процент невязки водного баланса.
 
 ---
 

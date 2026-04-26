@@ -1,0 +1,12 @@
+B5 steady-state MF6 comparison: RIV vs DRN vs GHB
+Workspace: F:\IT\Github\Hydrogeology\models\mf6\05_riv_drn_ghb
+Configuration: B1 grid + CHD left/right + top-row boundary package (cols 1..8)
+Shared boundary params: stage/head=7.0, cond=20.0, RIV bottom=5.0
+
+Results:
+- RIV: center_head=4.554963, top_mid_head=5.144340, package_exchange_q=125.897411, budget_discrepancy=-0.000000%
+- DRN: center_head=4.426746, top_mid_head=4.389353, package_exchange_q=-45.716864, budget_discrepancy=-0.000000%
+- GHB: center_head=4.600392, top_mid_head=5.328485, package_exchange_q=223.174585, budget_discrepancy=-0.000000%
+
+CSV: F:\IT\Github\Hydrogeology\models\mf6\05_riv_drn_ghb\comparison_metrics.csv
+Plot: F:\IT\Github\Hydrogeology\models\mf6\05_riv_drn_ghb\comparison_plot.png

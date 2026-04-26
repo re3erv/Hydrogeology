@@ -298,6 +298,15 @@ Definition of Done:
 - [ ] В README к задаче указан `.nam` файл для PM8.
 - [ ] В `docs/screenshots_pm8/` сохранен скриншот проверки.
 
+Примечание по текущей реализации B1 в репозитории:
+
+- Скрипт запуска: `python scripts/build_mf2005_01_confined.py` (если PM8 ругается на convert, пересоберите в короткий путь: `python scripts/build_mf2005_01_confined.py --workspace C:/gw/b1`);
+- `.nam` для импорта в PM8: `models/mf2005/01_confined_steady/mf2005_01_confined.nam`;
+- Если обычный `.nam` не конвертируется в PM8, попробуйте fallback-файлы: `..._pm8.nam`, `..._pm8_u0.nam`, `..._pm8_tr.nam`, `..._pm8_num0.nam`, `..._pm8_num1.nam`, `..._pm8_full.nam` (по очереди);
+- Если PM8 в `File -> Open` просит только `*.pm5`, это ожидаемо: сначала сделайте импорт/конвертацию native MODFLOW Name File (`*.nam`) в проект PM8;
+- Пошагово для PM8: `docs/notes/pm8_import_b1.md`;
+- Быстрый просмотр результата: `models/mf2005/01_confined_steady/heads_map.png` и `models/mf2005/01_confined_steady/run_summary.txt` (там же budget percent discrepancy из `.list`).
+
 ### B2. Неоднородная гидропроводность K
 
 Цель: понять влияние пространственной неоднородности K.

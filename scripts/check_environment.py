@@ -25,7 +25,12 @@ REQUIRED_EXES = ("mf6", "mf2005", "mfnwt")
 class CheckResult:
     name: str
     ok: bool
-    details: str
+    detail: str
+
+    @property
+    def details(self) -> str:
+        """Backward-compatible alias used by CLI output formatting."""
+        return self.detail
 
 
 def _print_header() -> None:
@@ -36,19 +41,19 @@ def _print_header() -> None:
     print()
 
 
-def check_python_runtime() -> list[CheckResult]:
+def check_python_runtime() -> CheckResult:
     major, minor = sys.version_info[:2]
     stable = major == 3 and 11 <= minor <= 13
-    details = (
+    detail = (
         f"detected {major}.{minor}; recommended 3.11-3.13 for stable scientific stack. "
         "If installs fail, create a 3.11 environment."
     )
-    return [CheckResult(name="python", ok=stable, details=details)]
+    return CheckResult(name="python", ok=stable, detail=detail)
 
 
-def check_python_packages() -> list[CheckResult]:
+def check_python_packages(packages: Iterable[str] | None = None) -> list[CheckResult]:
     results: list[CheckResult] = []
-    for pkg in REQUIRED_PACKAGES:
+    for pkg in (packages or REQUIRED_PACKAGES):
         try:
             mod = importlib.import_module(pkg)
             version = getattr(mod, "__version__", "unknown")
@@ -58,8 +63,12 @@ def check_python_packages() -> list[CheckResult]:
     return results
 
 
+def build_pip_install_command(packages: Iterable[str]) -> list[str]:
+    return [sys.executable, "-m", "pip", "install", *packages]
+
+
 def _pip_install(packages: Iterable[str]) -> tuple[bool, str]:
-    cmd = [sys.executable, "-m", "pip", "install", *packages]
+    cmd = build_pip_install_command(packages)
     proc = subprocess.run(cmd, capture_output=True, text=True)
     if proc.returncode == 0:
         return True, f"pip: installed: {', '.join(packages)}"
@@ -83,15 +92,43 @@ def find_executable(name: str) -> str | None:
     return None
 
 
-def check_modflow_executables() -> list[CheckResult]:
+def check_executables(executables: Iterable[str] | None = None) -> list[CheckResult]:
     results: list[CheckResult] = []
-    for exe in REQUIRED_EXES:
+    for exe in (executables or REQUIRED_EXES):
         path = find_executable(exe)
         if path:
             results.append(CheckResult(exe, True, f"found at {path}"))
         else:
             results.append(CheckResult(exe, False, "not found in PATH"))
     return results
+
+
+def check_modflow_executables() -> list[CheckResult]:
+    """Backward-compatible wrapper for default MODFLOW executable checks."""
+    return check_executables(REQUIRED_EXES)
+
+
+def build_install_recommendations(os_name: str) -> list[str]:
+    _ = os_name  # currently same recommendations across supported OS families
+    return [
+        "Python package for installer helper: pip install flopy",
+        "Install USGS binaries via FloPy CLI: python -m flopy.utils.get_modflow :flopy",
+        "Alternative entry point (if installed to PATH): get-modflow :flopy",
+        "By default this script auto-installs missing Python packages; use --diagnose-only to disable.",
+        "Guide: https://flopy.readthedocs.io/en/latest/md/get_modflow.html",
+        "If command-line install is blocked, use official downloads:",
+<<<<<<< ours
+        "- MF6: https://water.usgs.gov/water-resources/software/MODFLOW-6/",
+        "- MF2005: https://www.usgs.gov/software/modflow-2005-usgs-three-dimensional-finite-difference-ground-water-model",
+        "- MF-NWT: https://water.usgs.gov/ogw/modflow-nwt/",
+=======
+        "MF6: https://water.usgs.gov/water-resources/software/MODFLOW-6/",
+        "MF2005: https://www.usgs.gov/software/modflow-2005-usgs-three-dimensional-finite-difference-ground-water-model",
+        "MF-NWT: https://water.usgs.gov/ogw/modflow-nwt/",
+>>>>>>> theirs
+        "Install Python deps in current interpreter: python -m pip install -U pip pytest flopy numpy pandas matplotlib",
+        "Run tests reliably from this interpreter: python -m pytest -q",
+    ]
 
 
 def install_modflow() -> tuple[bool, str]:
@@ -120,7 +157,7 @@ def main() -> int:
     _print_header()
 
     runtime = check_python_runtime()
-    print_section("Python runtime", runtime)
+    print_section("Python runtime", [runtime])
 
     packages_before = check_python_packages()
     print_section("Python packages", packages_before)
@@ -140,7 +177,7 @@ def main() -> int:
     else:
         packages_after = packages_before
 
-    exes_before = check_modflow_executables()
+    exes_before = check_executables(REQUIRED_EXES)
     print_section("MODFLOW executables", exes_before)
 
     if not args.diagnose_only:
@@ -150,7 +187,7 @@ def main() -> int:
             print(f"- [{'OK' if ok else 'MISS'}] {msg}")
             print()
 
-            exes_after = check_modflow_executables()
+            exes_after = check_executables(REQUIRED_EXES)
             print_section("MODFLOW executables (after auto-install)", exes_after)
         else:
             exes_after = exes_before
@@ -158,23 +195,11 @@ def main() -> int:
         exes_after = exes_before
 
     print("Recommended install commands and links")
-    print("- Python package for installer helper: pip install flopy")
-    print("- Install USGS binaries via FloPy CLI: python -m flopy.utils.get_modflow :flopy")
-    print("- Alternative entry point (if installed to PATH): get-modflow :flopy")
-    print("- By default this script auto-installs missing Python packages; use --diagnose-only to disable.")
-    print("- Guide: https://flopy.readthedocs.io/en/latest/md/get_modflow.html")
-    print("- If command-line install is blocked, use official downloads:")
-    print("- - MF6: https://water.usgs.gov/water-resources/software/MODFLOW-6/")
-    print("- - MF2005: https://www.usgs.gov/software/modflow-2005-usgs-three-dimensional-finite-difference-ground-water-model")
-    print("- - MF-NWT: https://water.usgs.gov/ogw/modflow-nwt/")
-    print(
-        "- Install Python deps in current interpreter: "
-        "python -m pip install -U pip pytest flopy numpy pandas matplotlib"
-    )
-    print("- Run tests reliably from this interpreter: python -m pytest -q")
+    for line in build_install_recommendations(platform.system().lower()):
+        print(f"- {line}")
     print()
 
-    ready = all(r.ok for r in runtime) and all(r.ok for r in packages_after) and all(r.ok for r in exes_after)
+    ready = runtime.ok and all(r.ok for r in packages_after) and all(r.ok for r in exes_after)
     if ready:
         print("Environment looks ready.")
         return 0

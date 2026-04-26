@@ -1,12 +1,12 @@
 B3 steady-state confined model with areal recharge (MODFLOW 6)
 Workspace: F:\IT\Github\Hydrogeology\models\mf6\03_recharge
 Simulation name file: F:\IT\Github\Hydrogeology\models\mf6\03_recharge\mfsim.nam
-Recharge rate (RCHA): 1.000000e-04
+Recharge rate (RCHA): 1.000000e-02
 Head left boundary mean: 10.0000
 Head right boundary mean: 0.0000
 Budget percent discrepancy (%): 0.000000
 Peak recharge-mound cell (row, col): (4, 4)
-Max interior rise above no-recharge linear baseline: 0.100011
+Max interior rise above no-recharge linear baseline: 10.000007
 List file: F:\IT\Github\Hydrogeology\models\mf6\03_recharge\mfsim.lst
 Head file: F:\IT\Github\Hydrogeology\models\mf6\03_recharge\mf6_03_recharge.hds
 Budget file: F:\IT\Github\Hydrogeology\models\mf6\03_recharge\mf6_03_recharge.cbc

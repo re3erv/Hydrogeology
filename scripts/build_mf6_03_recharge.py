@@ -226,7 +226,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--workspace", type=Path, default=WORKSPACE)
     parser.add_argument("--sim-name", default=SIM_NAME)
     parser.add_argument("--gwf-name", default=GWF_NAME)
-    parser.add_argument("--recharge-rate", type=float, default=1.0e-4)
+    parser.add_argument("--recharge-rate", type=float, default=1.0e-2)
     return parser.parse_args()
 
 

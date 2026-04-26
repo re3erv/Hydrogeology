@@ -97,6 +97,14 @@ def _budget_residual_percent(list_file: Path) -> float | None:
     return None
 
 
+def _linearity_metrics(heads: np.ndarray) -> tuple[float, float]:
+    row_profile = np.mean(heads[0], axis=0)
+    expected = np.linspace(row_profile[0], row_profile[-1], row_profile.size)
+    max_abs_deviation = float(np.max(np.abs(row_profile - expected)))
+    rmse = float(np.sqrt(np.mean((row_profile - expected) ** 2)))
+    return max_abs_deviation, rmse
+
+
 def run_b1_model(workspace: Path = WORKSPACE, sim_name: str = SIM_NAME, gwf_name: str = GWF_NAME) -> dict[str, Path | float | None]:
     sim = build_simulation(workspace=workspace, sim_name=sim_name, gwf_name=gwf_name)
     sim.write_simulation()
@@ -119,6 +127,7 @@ def run_b1_model(workspace: Path = WORKSPACE, sim_name: str = SIM_NAME, gwf_name
     left_mean = float(np.mean(heads[0, :, 0]))
     right_mean = float(np.mean(heads[0, :, -1]))
     residual_pct = _budget_residual_percent(lst_path)
+    linearity_max_dev, linearity_rmse = _linearity_metrics(heads)
 
     summary_lines = [
         "B1 first steady-state confined model (MODFLOW 6)",
@@ -127,6 +136,8 @@ def run_b1_model(workspace: Path = WORKSPACE, sim_name: str = SIM_NAME, gwf_name
         f"Head left boundary mean: {left_mean:.4f}",
         f"Head right boundary mean: {right_mean:.4f}",
         "Budget percent discrepancy (%): " + (f"{residual_pct:.6f}" if residual_pct is not None else "not parsed"),
+        f"Linearity max abs deviation: {linearity_max_dev:.6f}",
+        f"Linearity RMSE: {linearity_rmse:.6f}",
         f"List file: {lst_path}",
         f"Head file: {hds_path}",
         f"Budget file: {cbc_path}",
@@ -143,6 +154,8 @@ def run_b1_model(workspace: Path = WORKSPACE, sim_name: str = SIM_NAME, gwf_name
         "png_path": png_path,
         "summary_path": summary_path,
         "residual_pct": residual_pct,
+        "linearity_max_dev": linearity_max_dev,
+        "linearity_rmse": linearity_rmse,
     }
 
 
@@ -164,3 +177,5 @@ if __name__ == "__main__":
         print("Budget residual (%): not parsed from list file")
     else:
         print(f"Budget residual (%): {result['residual_pct']:.6f}")
+    print(f"Linearity max abs deviation: {result['linearity_max_dev']:.6f}")
+    print(f"Linearity RMSE: {result['linearity_rmse']:.6f}")

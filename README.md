@@ -37,6 +37,13 @@ python scripts/check_environment.py --diagnose-only
 python scripts/build_mf6_01_confined.py
 ```
 
+
+4. Открыть проект в ModelMuse и проверить входные данные по чеклисту:
+
+```text
+docs/notes/modelmuse_b1_checklist.md
+```
+
 Ожидаемые артефакты:
 
 - `models/mf6/01_confined_steady/mfsim.nam`
@@ -77,7 +84,8 @@ Definition of Done:
 - модель успешно запускается через `sim.run_simulation()`;
 - градиент напора близок к линейному;
 - сформированы график и краткий текстовый summary;
-- в `run_summary.txt` отражён процент невязки водного баланса.
+- в `run_summary.txt` отражён процент невязки водного баланса;
+- дополнительно рассчитана метрика линейности профиля напора (max deviation и RMSE).
 
 ---
 

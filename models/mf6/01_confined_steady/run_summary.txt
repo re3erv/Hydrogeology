@@ -1,0 +1,12 @@
+B1 first steady-state confined model (MODFLOW 6)
+Workspace: F:\IT\Github\Hydrogeology\models\mf6\01_confined_steady
+Simulation name file: F:\IT\Github\Hydrogeology\models\mf6\01_confined_steady\mfsim.nam
+Head left boundary mean: 10.0000
+Head right boundary mean: 0.0000
+Budget percent discrepancy (%): not parsed
+Linearity max abs deviation: 0.000002
+Linearity RMSE: 0.000001
+List file: F:\IT\Github\Hydrogeology\models\mf6\01_confined_steady\mfsim.lst
+Head file: F:\IT\Github\Hydrogeology\models\mf6\01_confined_steady\mf6_01_confined.hds
+Budget file: F:\IT\Github\Hydrogeology\models\mf6\01_confined_steady\mf6_01_confined.cbc
+Head map: F:\IT\Github\Hydrogeology\models\mf6\01_confined_steady\heads_map.png

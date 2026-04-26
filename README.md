@@ -98,6 +98,29 @@ docs/notes/modelmuse_b3_checklist.md
 
 ---
 
+9. Запустить модуль B4 (pumping well `WEL` и drawdown):
+
+```bash
+python scripts/build_mf6_04_pumping_well.py
+```
+
+10. Открыть проект B4 в ModelMuse и пройти чеклист:
+
+```text
+docs/notes/modelmuse_b4_checklist.md
+```
+
+Ожидаемые артефакты B4:
+
+- `models/mf6/04_pumping_well/mfsim.nam`
+- `models/mf6/04_pumping_well/mf6_04_pumping_well.hds`
+- `models/mf6/04_pumping_well/mf6_04_pumping_well.cbc`
+- `models/mf6/04_pumping_well/heads_map.png`
+- `models/mf6/04_pumping_well/drawdown_map.png`
+- `models/mf6/04_pumping_well/run_summary.txt`
+
+---
+
 ## Этап B3. Recharge (`RCHA`)
 
 Цель: показать, как равномерное площадное питание влияет на распределение напоров.
@@ -116,6 +139,27 @@ Definition of Done:
 - сформированы карты `heads_map.png` и `recharge_map.png`;
 - в `run_summary.txt` отражён процент невязки водного баланса;
 - рассчитана метрика подъёма центральной области относительно боковых CHD-границ.
+
+---
+
+## Этап B4. Pumping well (`WEL`) и drawdown
+
+Цель: показать, как локальная откачка формирует депрессионную воронку и понижение уровня относительно базового сценария без откачки.
+
+Постановка (минимально относительно B1):
+
+- тот же grid: 1 слой, 10 x 10 ячеек;
+- те же CHD слева/справа (`10` и `0`);
+- однородная гидропроводность `K = 10`;
+- одна скважина `WEL` в центре (по умолчанию `row=5, col=5`) с расходом `Q = -500`;
+- steady-state.
+
+Definition of Done:
+
+- модель запускается через `sim.run_simulation()`;
+- сформированы карты `heads_map.png` и `drawdown_map.png`;
+- в `run_summary.txt` отражён процент невязки водного баланса;
+- рассчитана метрика максимального drawdown (`baseline - pumped`) и положение ячейки максимума.
 
 ---
 

@@ -1,0 +1,16 @@
+B4 steady-state confined model with pumping well WEL and drawdown (MODFLOW 6)
+Workspace: F:\IT\Github\Hydrogeology\models\mf6\04_pumping_well
+Simulation name file: F:\IT\Github\Hydrogeology\models\mf6\04_pumping_well\mfsim.nam
+Pumping rate (WEL): -500.000000
+Well cell (row, col): (5, 5)
+Pumped run left boundary mean head: 10.0000
+Pumped run right boundary mean head: 0.0000
+Pumped run well-cell head: 1.676429
+Max drawdown (baseline - pumped): 2.768024
+Max drawdown cell (row, col): (5, 5)
+Budget percent discrepancy (%): 0.000000
+List file: F:\IT\Github\Hydrogeology\models\mf6\04_pumping_well\mfsim.lst
+Head file: F:\IT\Github\Hydrogeology\models\mf6\04_pumping_well\mf6_04_pumping_well.hds
+Budget file: F:\IT\Github\Hydrogeology\models\mf6\04_pumping_well\mf6_04_pumping_well.cbc
+Head map: F:\IT\Github\Hydrogeology\models\mf6\04_pumping_well\heads_map.png
+Drawdown map: F:\IT\Github\Hydrogeology\models\mf6\04_pumping_well\drawdown_map.png

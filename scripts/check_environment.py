@@ -18,7 +18,7 @@ from dataclasses import dataclass
 from typing import Iterable
 
 REQUIRED_PACKAGES = ("pytest", "flopy", "numpy", "pandas", "matplotlib")
-REQUIRED_EXES = ("mf6", "mf2005", "mfnwt")
+REQUIRED_EXES = ("mf6",)
 
 
 @dataclass
@@ -118,8 +118,6 @@ def build_install_recommendations(os_name: str) -> list[str]:
         "Guide: https://flopy.readthedocs.io/en/latest/md/get_modflow.html",
         "If command-line install is blocked, use official downloads:",
         "MF6: https://water.usgs.gov/water-resources/software/MODFLOW-6/",
-        "MF2005: https://www.usgs.gov/software/modflow-2005-usgs-three-dimensional-finite-difference-ground-water-model",
-        "MF-NWT: https://water.usgs.gov/ogw/modflow-nwt/",
         "Install Python deps in current interpreter: python -m pip install -U pip pytest flopy numpy pandas matplotlib",
         "Run tests reliably from this interpreter: python -m pytest -q",
     ]

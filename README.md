@@ -52,8 +52,49 @@ docs/notes/modelmuse_b1_checklist.md
 - `models/mf6/01_confined_steady/heads_map.png`
 - `models/mf6/01_confined_steady/run_summary.txt`
 
+5. Запустить модуль B2 (неоднородная гидропроводность `K`):
+
+```bash
+python scripts/build_mf6_02_heterogeneous_k.py
+```
+
+6. Открыть проект B2 в ModelMuse и пройти чеклист:
+
+```text
+docs/notes/modelmuse_b2_checklist.md
+```
+
+Ожидаемые артефакты B2:
+
+- `models/mf6/02_heterogeneous_k/mfsim.nam`
+- `models/mf6/02_heterogeneous_k/mf6_02_heterogeneous_k.hds`
+- `models/mf6/02_heterogeneous_k/mf6_02_heterogeneous_k.cbc`
+- `models/mf6/02_heterogeneous_k/heads_map.png`
+- `models/mf6/02_heterogeneous_k/k_field_map.png`
+- `models/mf6/02_heterogeneous_k/run_summary.txt`
+
 ---
 
+## Этап B2. Неоднородная гидропроводность `K`
+
+Цель: показать, как неоднородность `K` меняет поле напоров при тех же граничных условиях.
+
+Постановка (относительно B1):
+
+- тот же grid: 1 слой, 10 x 10 ячеек;
+- те же CHD слева/справа (`10` и `0`);
+- базовое поле `K = 10`;
+- центральная low-K линза (строки `3..6`, столбцы `3..6`) с `K = 1`;
+- steady-state.
+
+Definition of Done:
+
+- модель запускается через `sim.run_simulation()`;
+- сформированы карты `heads_map.png` и `k_field_map.png`;
+- в `run_summary.txt` отражён процент невязки водного баланса;
+- вычислена метрика отклонения профильной линейности по строкам.
+
+---
 ## Этап B1. Первая стационарная confined-модель (MF6)
 
 Цель: построить простую 1-слойную стационарную модель с линейным градиентом напора.

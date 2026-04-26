@@ -1,0 +1,14 @@
+B2 steady-state confined model with heterogeneous K (MODFLOW 6)
+Workspace: F:\IT\Github\Hydrogeology\models\mf6\02_heterogeneous_k
+Simulation name file: F:\IT\Github\Hydrogeology\models\mf6\02_heterogeneous_k\mfsim.nam
+K field: background K=10, central low-K lens (rows 3-6, cols 3-6) with K=1
+Head left boundary mean: 10.0000
+Head right boundary mean: 0.0000
+Budget percent discrepancy (%): not parsed
+Row with max nonlinearity: 4
+Max row-profile abs deviation from linear trend: 1.221049
+List file: F:\IT\Github\Hydrogeology\models\mf6\02_heterogeneous_k\mfsim.lst
+Head file: F:\IT\Github\Hydrogeology\models\mf6\02_heterogeneous_k\mf6_02_heterogeneous_k.hds
+Budget file: F:\IT\Github\Hydrogeology\models\mf6\02_heterogeneous_k\mf6_02_heterogeneous_k.cbc
+Head map: F:\IT\Github\Hydrogeology\models\mf6\02_heterogeneous_k\heads_map.png
+K field map: F:\IT\Github\Hydrogeology\models\mf6\02_heterogeneous_k\k_field_map.png

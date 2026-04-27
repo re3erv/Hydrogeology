@@ -1,0 +1,14 @@
+B8 transient model with UTL-OBS observations and CSV diagnostics (MODFLOW 6)
+Workspace: F:\IT\Github\Hydrogeology\models\mf6\08_observations_csv
+Simulation name file: F:\IT\Github\Hydrogeology\models\mf6\08_observations_csv\mfsim.nam
+Observation points: center, upgradient, downgradient (row 5)
+Stress periods: SP1 steady (1 day), SP2 pumping (30 days), SP3 recovery (30 days)
+Boundary conditions: CHD left=10/right=0; WEL(center) SP2=-500.00
+Well location (layer,row,col): (0, 5, 5)
+Budget percent discrepancy (%): -0.000000
+Observation CSV: F:\IT\Github\Hydrogeology\models\mf6\08_observations_csv\head_observations.csv
+Diagnostics CSV: F:\IT\Github\Hydrogeology\models\mf6\08_observations_csv\observations_diagnostics.csv
+Observation plot: F:\IT\Github\Hydrogeology\models\mf6\08_observations_csv\observations_timeseries.png
+List file: F:\IT\Github\Hydrogeology\models\mf6\08_observations_csv\mfsim.lst
+Head file: F:\IT\Github\Hydrogeology\models\mf6\08_observations_csv\mf6_08_observations_csv.hds
+Budget file: F:\IT\Github\Hydrogeology\models\mf6\08_observations_csv\mf6_08_observations_csv.cbc

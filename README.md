@@ -192,6 +192,30 @@ docs/notes/modelmuse_b7_checklist.md
 
 ---
 
+17. Запустить модуль B8 (наблюдения `OBS`, time series и CSV-диагностика):
+
+```bash
+python scripts/build_mf6_08_observations_csv.py
+```
+
+18. Открыть проект B8 в ModelMuse и пройти чеклист:
+
+```text
+docs/notes/modelmuse_b8_checklist.md
+```
+
+Ожидаемые артефакты B8:
+
+- `models/mf6/08_observations_csv/mfsim.nam`
+- `models/mf6/08_observations_csv/mf6_08_observations_csv.hds`
+- `models/mf6/08_observations_csv/mf6_08_observations_csv.cbc`
+- `models/mf6/08_observations_csv/head_observations.csv`
+- `models/mf6/08_observations_csv/observations_diagnostics.csv`
+- `models/mf6/08_observations_csv/observations_timeseries.png`
+- `models/mf6/08_observations_csv/run_summary.txt`
+
+---
+
 ## Этап B3. Recharge (`RCHA`)
 
 Цель: показать, как равномерное площадное питание влияет на распределение напоров.
@@ -390,3 +414,24 @@ Definition of Done:
 - в `run_summary.txt` отражён процент невязки водного баланса;
 - рассчитаны метрики максимального drawdown к концу SP2 и остаточного drawdown к концу SP3.
 
+
+---
+
+## Этап B8. Observations/time series и CSV-диагностика
+
+Цель: показать, как в MF6 организовать экспорт наблюдений в CSV через `UTL-OBS` и на их основе сделать простую автоматическую диагностику transient-отклика.
+
+Постановка (минимально относительно B7):
+
+- та же transient-схема: SP1 steady (1 день), SP2 pumping (30 дней), SP3 recovery (30 дней);
+- те же `CHD` слева/справа (`10` и `0`), `K=10`, `STO` параметры из B7;
+- та же центральная скважина `WEL` (SP2: `Q=-500`);
+- добавлены наблюдения `HEAD` в трёх точках: `h_center`, `h_upgradient`, `h_downgradient`;
+- результаты наблюдений пишутся в `head_observations.csv`.
+
+Definition of Done:
+
+- модель запускается через `sim.run_simulation()`;
+- сформированы `head_observations.csv`, `observations_diagnostics.csv`, `observations_timeseries.png`;
+- в `observations_diagnostics.csv` рассчитаны ключевые метрики (drawdown к концу SP2, остаточный drawdown к концу SP3, монотонность падения/восстановления);
+- в `run_summary.txt` отражён процент невязки водного баланса и ссылки на CSV/график.

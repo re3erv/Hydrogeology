@@ -1,0 +1,9 @@
+metric,value,unit,description
+start_head,4.444453,m,Center head at first output time.
+head_end_pumping,1.676422,m,Center head near end of SP2 (t≈31 days).
+head_end_recovery,4.444444,m,Center head at final output time.
+drawdown_end_pumping,2.768031,m,Drawdown at end of pumping relative to start head.
+residual_drawdown_end_recovery,0.000009,m,Residual drawdown at simulation end relative to start head.
+min_center_head,1.676422,m,Minimum center head over full transient at t=31.00 days.
+pumping_nonincreasing_share,1.000000,fraction,Share of pumping interval steps with non-increasing center head.
+recovery_nondecreasing_share,1.000000,fraction,Share of recovery interval steps with non-decreasing center head.

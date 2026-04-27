@@ -1,0 +1,16 @@
+B6 steady-state multilayer model with interlayer leakage (MODFLOW 6)
+Workspace: F:\IT\Github\Hydrogeology\models\mf6\06_multilayer_leakage
+Simulation name file: F:\IT\Github\Hydrogeology\models\mf6\06_multilayer_leakage\mfsim.nam
+Grid: 3 layers, 10x10 cells, top=30, botm=[20, 10, 0]
+Hydraulic conductivity by layer: kh=[10, 2, 10], kv=[1, 0.05, 1]
+Boundary conditions: CHD left=10/right=0 on all layers, RCHA=1e-4, WEL=-700.00
+Well location (layer,row,col): (1, 5, 5)
+Center heads by layer (L1,L2,L3): 2.957725, 0.486150, 2.947565
+Net vertical flow L1->L2: 355.327532
+Net vertical flow L2->L3: -288.112800
+Budget percent discrepancy (%): 0.000000
+List file: F:\IT\Github\Hydrogeology\models\mf6\06_multilayer_leakage\mfsim.lst
+Head file: F:\IT\Github\Hydrogeology\models\mf6\06_multilayer_leakage\mf6_06_multilayer_leakage.hds
+Budget file: F:\IT\Github\Hydrogeology\models\mf6\06_multilayer_leakage\mf6_06_multilayer_leakage.cbc
+Heads map: F:\IT\Github\Hydrogeology\models\mf6\06_multilayer_leakage\heads_layers_map.png
+Vertical leakage map: F:\IT\Github\Hydrogeology\models\mf6\06_multilayer_leakage\vertical_leakage_map.png

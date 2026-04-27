@@ -2,7 +2,7 @@
 
 Учебный репозиторий по FloPy с фокусом **только на MODFLOW 6 (MF6)**.
 
-Дата обновления: 2026-04-26.
+Дата обновления: 2026-04-27.
 
 ## Важное изменение курса
 
@@ -144,6 +144,30 @@ docs/notes/modelmuse_b5_checklist.md
 
 ---
 
+
+13. Запустить модуль B6 (многослойная модель и межслойные перетоки):
+
+```bash
+python scripts/build_mf6_06_multilayer_leakage.py
+```
+
+14. Открыть проект B6 в ModelMuse и пройти чеклист:
+
+```text
+docs/notes/modelmuse_b6_checklist.md
+```
+
+Ожидаемые артефакты B6:
+
+- `models/mf6/06_multilayer_leakage/mfsim.nam`
+- `models/mf6/06_multilayer_leakage/mf6_06_multilayer_leakage.hds`
+- `models/mf6/06_multilayer_leakage/mf6_06_multilayer_leakage.cbc`
+- `models/mf6/06_multilayer_leakage/heads_layers_map.png`
+- `models/mf6/06_multilayer_leakage/vertical_leakage_map.png`
+- `models/mf6/06_multilayer_leakage/run_summary.txt`
+
+---
+
 ## Этап B3. Recharge (`RCHA`)
 
 Цель: показать, как равномерное площадное питание влияет на распределение напоров.
@@ -210,6 +234,30 @@ Definition of Done:
   - напор в верхней центральной ячейке,
   - суммарный обмен через пакет,
   - процент невязки водного баланса.
+
+---
+
+
+## Этап B6. Многослойная модель и межслойные перетоки
+
+Цель: показать, как 3-слойная система с менее проницаемым средним слоем формирует вертикальные градиенты и межслойный обмен при откачке.
+
+Постановка (минимально относительно B1/B4):
+
+- grid: 3 слоя, 10 x 10 ячеек;
+- геометрия по слоям: `top=30`, `botm=[20, 10, 0]`;
+- CHD слева/справа (`10` и `0`) во всех слоях;
+- `RCHA = 1e-4` по верхней поверхности;
+- одна скважина `WEL` в среднем слое: `(layer=1, row=5, col=5)`, `Q = -700`;
+- `kh=[10, 2, 10]`, `kv=[1, 0.05, 1]`;
+- steady-state.
+
+Definition of Done:
+
+- модель запускается через `sim.run_simulation()`;
+- сформированы `heads_layers_map.png` и `vertical_leakage_map.png`;
+- в `run_summary.txt` отражён процент невязки водного баланса;
+- рассчитаны суммарные межслойные перетоки `L1->L2` и `L2->L3`.
 
 ---
 

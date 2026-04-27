@@ -168,6 +168,30 @@ docs/notes/modelmuse_b6_checklist.md
 
 ---
 
+
+15. Запустить модуль B7 (transient-постановка через `STO`):
+
+```bash
+python scripts/build_mf6_07_transient_sto.py
+```
+
+16. Открыть проект B7 в ModelMuse и пройти чеклист:
+
+```text
+docs/notes/modelmuse_b7_checklist.md
+```
+
+Ожидаемые артефакты B7:
+
+- `models/mf6/07_transient_sto/mfsim.nam`
+- `models/mf6/07_transient_sto/mf6_07_transient_sto.hds`
+- `models/mf6/07_transient_sto/mf6_07_transient_sto.cbc`
+- `models/mf6/07_transient_sto/heads_timeseries.png`
+- `models/mf6/07_transient_sto/drawdown_transient_maps.png`
+- `models/mf6/07_transient_sto/run_summary.txt`
+
+---
+
 ## Этап B3. Recharge (`RCHA`)
 
 Цель: показать, как равномерное площадное питание влияет на распределение напоров.
@@ -340,3 +364,29 @@ Definition of Done:
 - MF6 USGS: https://www.usgs.gov/software/modflow-6-usgs-modular-hydrologic-model
 - MF6 releases: https://github.com/MODFLOW-ORG/modflow6/releases
 - Официальные MF6 примеры: https://modflow6-examples.readthedocs.io/en/master/
+
+---
+
+## Этап B7. Transient-постановка через `STO`
+
+Цель: показать, как пакет хранения `STO` формирует временную реакцию напоров при включении/выключении откачки.
+
+Постановка (минимально относительно B1/B4):
+
+- grid: 1 слой, 10 x 10 ячеек;
+- геометрия: `top=10`, `botm=0`;
+- CHD слева/справа (`10` и `0`);
+- однородная гидропроводность `K = 10`;
+- `STO`: `ss=1e-5`, `sy=0.15`, `iconvert=0`;
+- 3 stress period:
+  - SP1: steady-state, 1 день, без откачки;
+  - SP2: transient, 30 дней, `WEL` в центре с `Q = -500`;
+  - SP3: transient, 30 дней, откачка остановлена (`Q = 0`).
+
+Definition of Done:
+
+- модель запускается через `sim.run_simulation()`;
+- сформированы `heads_timeseries.png` и `drawdown_transient_maps.png`;
+- в `run_summary.txt` отражён процент невязки водного баланса;
+- рассчитаны метрики максимального drawdown к концу SP2 и остаточного drawdown к концу SP3.
+

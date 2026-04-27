@@ -1,0 +1,18 @@
+B7 transient model with storage package STO (MODFLOW 6)
+Workspace: F:\IT\Github\Hydrogeology\models\mf6\07_transient_sto
+Simulation name file: F:\IT\Github\Hydrogeology\models\mf6\07_transient_sto\mfsim.nam
+Grid: 1 layer, 10x10 cells, top=10, botm=0, delr=delc=100
+Hydraulic properties: K=10, icelltype=0, SS=1e-5, SY=0.15, iconvert=0
+Stress periods: SP1 steady (1 day), SP2 transient pumping (30 days), SP3 transient recovery (30 days)
+Boundary conditions: CHD left=10/right=0; WEL(center) SP2=-500.00
+Well location (layer,row,col): (0, 5, 5)
+Center head min during pumping/recovery: 1.676422
+Center head at end of recovery: 4.444444
+Max drawdown at SP2 end: 2.768031
+Residual max drawdown at SP3 end: 0.000015
+Budget percent discrepancy (%): -0.000000
+List file: F:\IT\Github\Hydrogeology\models\mf6\07_transient_sto\mfsim.lst
+Head file: F:\IT\Github\Hydrogeology\models\mf6\07_transient_sto\mf6_07_transient_sto.hds
+Budget file: F:\IT\Github\Hydrogeology\models\mf6\07_transient_sto\mf6_07_transient_sto.cbc
+Heads time-series plot: F:\IT\Github\Hydrogeology\models\mf6\07_transient_sto\heads_timeseries.png
+Transient drawdown maps: F:\IT\Github\Hydrogeology\models\mf6\07_transient_sto\drawdown_transient_maps.png

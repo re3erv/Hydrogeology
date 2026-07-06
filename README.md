@@ -1,4 +1,4 @@
-# Hydrogeology
+# Hydrogeology_
 
 Учебный репозиторий по FloPy с фокусом **только на MODFLOW 6 (MF6)**.
 
